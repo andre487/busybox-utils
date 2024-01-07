@@ -1,0 +1,4 @@
+#!/bin/bash
+set -eufo pipefail
+cd "$(dirname "$0")"
+./busybox start-stop-daemon "$@"
