@@ -14,7 +14,8 @@ IFS=$'\n' read -r -d '' -a files < <(
 
 for file_name in "${files[@]}"; do
     read -r -d '' -a command < <(
-        grep -oE "^./busybox .+$" "$file_name" | sed -E 's#^./busybox ##' | sed -E 's# "\$@"$##' &&
+        # shellcheck disable=SC2016
+        grep -oE '^"\$bin" .+$' "$file_name" | sed -E 's#^"\$bin" ##' | sed -E 's# "\$@"$##' &&
         printf '\0'
     )
 
