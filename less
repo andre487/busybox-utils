@@ -8,4 +8,4 @@ if [[ ! -f "$bin" ]]; then
     echo "Unknown arch: $arch" >/dev/stderr
     exit 1
 fi
-"$bin" less -s -M "$@"
+"$bin" less -s -S -I -M "$@"
