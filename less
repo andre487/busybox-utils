@@ -1,4 +1,4 @@
 #!/bin/bash
 set -eufo pipefail
 cd "$(dirname "$0")"
-./busybox less -s -M +Gg "$@"
+./busybox less -s -M "$@"
