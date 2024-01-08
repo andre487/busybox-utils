@@ -33,24 +33,24 @@ elif [[ "$shell_base_name" == zsh ]]; then
         rc_file_path=''
     done
 else
-    echo "Unsupported shell: $SHELL"
-    echo "Please add this string to your rc-file: $export_expression"
+    echo "Unsupported shell: $SHELL" >/dev/stderr
+    echo "Please add this string to your rc-file: $export_expression" >/dev/stderr
     exit 1
 fi
 
 if [[ -z "$rc_file_path" ]]; then
-    echo "Unexpected configs layout for $SHELL"
-    echo "Please add this string to your rc-file: $export_expression"
+    echo "Unexpected configs layout for $SHELL" >/dev/stderr
+    echo "Please add this string to your rc-file: $export_expression" >/dev/stderr
     exit 1
 fi
 
 if grep -E "export PATH=.*$cur_dir" "$rc_file_path" &>/dev/null; then
-    echo "Toolset is already known in this system"
+    echo "Toolset is already known in this system" >/dev/stderr
     exit 0
 fi
 
 
-cat  << EOF > "$rc_file_path"
+cat  << EOF >>"$rc_file_path"
 #
 # Busybox utils init
 # See: https://github.com/andre487/busybox-utils
@@ -58,4 +58,4 @@ cat  << EOF > "$rc_file_path"
 $export_expression
 EOF
 
-echo "Success! Now re-login or make source $rc_file_path"
+echo "Success! Now re-login or make source $rc_file_path" >/dev/stderr
